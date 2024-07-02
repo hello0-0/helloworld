@@ -1,0 +1,177 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>植贝尔口腔预约单生成系统1.0</title>
+	<link rel="stylesheet" href="./layui/css/layui.css">
+    <style>
+        .blur{
+            background:url(b.jpg);
+            background-size:cover; 
+            background-repeat:no-repeat;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            filter: blur(15px);
+        }
+    </style>
+</head>
+<body>
+    <div class="blur"></div>
+	<div style="width:400px; height:520px; margin:auto;margin-top:10%;text-align: center;background: #fff;padding: 40px;border-radius: 3px;z-index: 1;position: relative;" id="main">
+	<center>
+	<h2>植贝尔口腔预约单生成系统</h2><br><br>
+	<form  class="layui-form"  method="post" onsubmit="return check()">
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">患者姓名</label>
+		    <div class="layui-input-block">
+		      <input type="text" name="username" required  id="username"  lay-verify="required" placeholder="请输入患者姓名" autocomplete="off" class="layui-input">
+		    </div>
+		  </div>
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">患者电话</label>
+		    <div class="layui-input-block">
+		      <input type="text" name="usertel" required  id="usertel"  lay-verify="required|usertel" lay-verify="required" placeholder="请输入患者电话" maxlength="11" autocomplete="off" class="layui-input">
+		    </div>
+		  </div> 
+        <div class="layui-form-item">
+		    <label class="layui-form-label">挂号科室</label>
+		    <div class="layui-input-block">
+		      <select name="userks" lay-verify="required" id="userks">
+		            <option value="种植科">种植科</option>
+					<option value="矫正">矫正</option>
+					<option value="补牙">补牙</option>
+					<option value="拔牙">拔牙</option>
+					<option value="洗牙">洗牙</option>
+					<option value="儿牙">儿牙</option>
+					<option value="修复">修复</option>
+					<option value="牙周治疗">牙周治疗</option>
+					<option value="根管治疗">根管治疗</option>
+		      </select>
+		    </div>
+		  </div>
+		 <div class="layui-form-item">
+		    <label class="layui-form-label">预约门店</label>
+		    <div class="layui-input-block">
+		      <select name="usermd" lay-verify="required" id="usermd">
+		            <option value="植贝尔口腔门诊(北湖机构)">植贝尔口腔门诊(北湖机构)</option>
+                    <option value="植贝尔口腔门诊(香雪机构)">植贝尔口腔门诊(香雪机构)</option>
+		    <option value="植贝尔口腔门诊(南湖机构)">植贝尔口腔门诊(南湖机构)</option>
+                    <option value="植贝尔口腔门诊(桂阳机构)">植贝尔口腔门诊(桂阳机构)</option>
+                    <option value="植贝尔口腔门诊(宜章机构)">植贝尔口腔门诊(宜章机构)</option>
+		      </select>
+		    </div>
+		  </div>
+		<div class="layui-form-item">
+		    <label class="layui-form-label">来院日期</label>
+		    <div class="layui-input-block">
+		      <input type="text" class="layui-input" name="userdate" placeholder="请填写日期如 2024-06-01 15:00" id="userdate">
+		    </div>
+		  </div>
+
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">挂号费用</label>
+		    <div class="layui-input-block">
+		      <input type="text" name="userghf" required  id="userpay" lay-verify="required" placeholder="请输入挂号费用,例 50 100" autocomplete="off" class="layui-input" value="0">
+		    </div>
+		  </div>
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">医院地址</label>
+		    <div class="layui-input-block">
+		      <select name="userdz" lay-verify="required" id="userdz">
+                <option value="植贝尔口腔门诊(北湖机构)地址：人民东路与北湖路交汇处，市工商银行旁边植贝尔口腔">植贝尔口腔门诊（北湖机构）地址：人民东路与北湖路交汇处，市工商银行旁边植贝尔口腔</option>
+                <option value="植贝尔口腔门诊(香雪机构)地址：郴州市香雪路天润天城 潮漫酒店对面（原帝国酒店）">植贝尔口腔门诊（香雪机构）地址：郴州市香雪路天润天城 潮漫酒店对面（原帝国酒店）</option>
+		<option value="植贝尔口腔门诊(南湖机构)地址：郴州市南湖路与文星路交汇处">植贝尔口腔门诊（南湖路机构）地址：郴州市南湖路与文星路交汇处</option>
+                <option value="植贝尔口腔门诊(桂阳机构)地址：蔡伦中路309号(原步步高现在是永誉百货斜对面)">植贝尔口腔门诊（桂阳机构）地址：蔡伦中路309号(原步步高现在是永誉百货斜对面)</option>
+                <option value="植贝尔口腔门诊(宜章机构)地址：宜章县市场监督管理局附近(红都酒店对面)植贝尔口腔">植贝尔口腔门诊（宜章机构）地址：宜章县市场监督管理局附近(红都酒店对面)植贝尔口腔</option>
+		      </select>
+		    </div>
+		  </div>
+          <br>
+		<button class="layui-btn" lay-submit lay-filter="formDemo">点击生成预约单</button>
+	</form>
+	</center>
+	<br>
+	<p>使用中发现问题请联系微信<span style="color: red;">yuanpeng_w</span></p>
+	<br /><br />
+	</div>
+    <div style="width:450px; height:800px; margin: 50px auto;align-items: center;background: #fff;padding: 0px;border-radius: 3px; display:none" id="img">
+    <canvas id="myCanvas" width='450'; height='800' style="z-index: 1;position: relative";></canvas>
+    </div>
+    <script>// 获取canvas元素
+        
+    </script>
+    <script type="text/javascript">
+		function canvasFilltext(ctx,zntext){
+			var num = 13;
+			for(var i=0;i*num<zntext.length;i++){
+				ctx.fillText(zntext.substr(0+num*i,num),150,479+30*i)
+			}
+		}
+        function check(){
+            var username = document.getElementById("username").value; 
+            var usertel = document.getElementById("usertel").value; 
+            var userks = document.getElementById("userks").value; 
+            var usermd = document.getElementById("usermd").value; 
+            var userdate = document.getElementById("userdate").value; 
+            var userpay = document.getElementById("userpay").value; 
+            var userdz = document.getElementById("userdz").value;
+            
+            var canvas = document.getElementById('myCanvas');
+            
+            var ctx = canvas.getContext('2d');
+            
+            // 创建新的Image对象
+            var img = new Image();
+            var gap = 37;
+            // 设置图片源地址
+            img.src = 'bg.png';
+            
+            // 确保图片加载完成后再绘制到canvas上
+            img.onload = function() {
+                // 在canvas上绘制图片
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                ctx.font = '18px 微软雅黑'; // 设置字体大小和类型
+                ctx.fillStyle = 'black'; // 设置字体颜色
+                ctx.fillText(username, 150, 251);
+                ctx.fillText(usertel, 150, 251+gap);
+                ctx.fillText(userks, 150, 251+gap*2);
+                ctx.fillText(usermd, 150, 251+gap*3);
+                ctx.fillText(userdate, 150, 253+gap*4);
+                ctx.fillText("￥"+userpay+'.00', 150, 255+gap*5);
+                canvasFilltext(ctx,userdz);
+            };
+            if(username==''){
+                alert('不填写姓名怎么生成？');
+                return false;
+            }
+            var reg = /^[\u4E00-\u9FA5]+$/; 
+            if(!reg.test(username)){ 
+                alert("姓名目前只能输入中文!"); 
+                return false; 
+            } 
+            document.getElementById('main').style.display = 'none';
+            document.getElementById('img').style.display = 'block';
+            return false
+        }
+    </script>
+	<script src="./layui/layui.js"></script>
+	<script>
+		layui.use('laydate', function(){
+		  var laydate = layui.laydate;
+		  laydate.render({
+		    elem: ''
+		    ,type: 'datetime'
+		  });
+		});
+	</script>
+
+</body>
+</html>
+
+
+
+
+
